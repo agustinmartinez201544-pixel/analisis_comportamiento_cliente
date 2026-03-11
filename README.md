@@ -92,4 +92,5 @@ El dashboard final permite filtrar por **Suscripción** (No / Sí), **Género** 
 
 ## 📬 Contacto
 
-**Agustín Martínez** — [linkedin.com/in/amartinez-ingind](https://www.linkedin.com/in/amartinez-ingind)
+**Agustín Martínez** — [linkedin.com/in/amartinez-ingind](https://www.linkedin.com/in/amartinez-ingind)  
+🔗 github.com/amartinez-ingind/analisis_comportamiento_cliente
