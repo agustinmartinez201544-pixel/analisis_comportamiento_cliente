@@ -20,7 +20,8 @@ Este proyecto consiste en un ciclo completo de análisis de datos, desde la inge
 - **Lenguaje:** Python (Pandas)
 - **Base de Datos:** PostgreSQL
 - **Visualización:** Power BI (DAX, Power Query)
-- **Documentación y Presentación:** Microsoft Word (Reporte)
+- **Documentación:** Microsoft Word (Reporte)
+- **Presentaciones:** Gamma (presentación visual asistida por IA) y NotebookLM (presentación generada desde el reporte)
 
 ---
 
@@ -84,7 +85,8 @@ El dashboard final permite filtrar por **Suscripción** (No / Sí), **Género** 
 - **Python:** Abrir y ejecutar el notebook `Project.ipynb` (requiere `pandas`).
 - **SQL:** Importar el archivo `ProyectoFinal.sql` en PostgreSQL.
 - **Power BI:** Abrir el archivo `Proyecto GitHub.pbix` con Power BI Desktop.
-- **Reporte:** El documento Word detallado es `Analisis_Comportamiento_Compras.docx`.
+- **Reporte:** El análisis completo se encuentra en `Analisis_Comportamiento_Compras.pdf`.
+- **Presentaciones:** `Presentación 1.pdf` (Gamma) y `Presentación 2.pdf` (NotebookLM).
 
 ---
 
