@@ -1,77 +1,93 @@
-Data Analytics End-to-End Project: **analisis_comportamiento_cliente**
+# Data Analytics End-to-End Project: **analisis_comportamiento_cliente**
 
-**📋 Resumen (Overview)**
+## 📋 Resumen (Overview)
 
-Este proyecto consiste en un ciclo completo de análisis de datos, desde la ingesta de datos crudos hasta la comunicación de hallazgos estratégicos. El objetivo principal fue identificar patrones clave en [describir sector: ej. consumo masivo / salud] para optimizar la toma de decisiones mediante el uso de Python, SQL y Power BI.
+Este proyecto consiste en un ciclo completo de análisis de datos, desde la ingesta de datos crudos hasta la comunicación de hallazgos estratégicos. El objetivo principal fue identificar patrones clave en el comportamiento de compra de clientes del sector retail para optimizar la toma de decisiones mediante el uso de Python, SQL y Power BI.
 
-**📊 Conjunto de Datos (Dataset)**
+---
 
-**Origen:** [Ej: Kaggle / Base de datos interna / CSV personalizado].
+## 📊 Conjunto de Datos (Dataset)
 
-**Descripción:** Contiene registros de [ej: ventas, pacientes, transacciones] con un volumen de 10.000+ filas.
+- **Origen:** Kaggle
+- **Descripción:** Contiene registros de transacciones de compra de clientes en diversas categorías de productos (Ropa, Accesorios, Calzado, Abrigos), con un volumen de 3.900 filas y 18 columnas.
+- **Variables clave:** `customer_id`, `age`, `gender`, `location`, `item_purchased`, `category`, `purchase_amount`, `season`, `size`, `color`, `discount_applied`, `previous_purchases`, `frequency_of_purchases`, `review_rating`, `shipping_type`, `subscription_status`
+- **Datos faltantes:** 37 valores nulos en la columna `review_rating`, imputados con la mediana por categoría de producto.
 
-**Variables clave:** [Ej: Fecha, ID_Cliente, Monto_Venta, Categoría_Producto].
+---
 
-**🛠️ Herramientas**
+## 🛠️ Herramientas
 
-**Lenguaje:** Python (Pandas, Matplotlib, Seaborn).
+- **Lenguaje:** Python (Pandas)
+- **Base de Datos:** PostgreSQL
+- **Visualización:** Power BI (DAX, Power Query)
+- **Documentación y Presentación:** Microsoft Word (Reporte)
 
-**Base de Datos:** PostgreSQL / MySQL / SQL Server.
+---
 
-**Visualización:** Power BI (DAX, Power Query).
+## 🚀 Pasos (Workflow)
 
-**Documentación y Presentación:** Microsoft Word (Reporte) y Gamma (PPT asistida por IA).
+### 1. Extracción y EDA (Python)
 
-**🚀 Pasos (Workflow)**
+Se realizó un Análisis Exploratorio de Datos (EDA) con Pandas para comprender la estructura del dataset y preparar los datos para el análisis.
 
-**1. Extracción y EDA (Python)**
-Se realizó un Análisis Exploratorio de Datos (EDA) detallado para comprender la distribución de las variables y detectar valores atípicos.
+- Limpieza e imputación de nulos en `review_rating` usando la mediana por categoría.
+- Estandarización de columnas a `snake_case`.
+- **Feature Engineering:**
+  - Creación de columna `age_group` (binning de edades: Joven, Mediana Edad, Adulto, Adulto Mayor).
+  - Creación de columna `purchase_frequency_days` a partir de los datos de compra.
+- Verificación de redundancia entre `discount_applied` y `promo_code_used`; se eliminó `promo_code_used`.
+- Carga del DataFrame limpio a PostgreSQL para análisis SQL.
 
-Limpieza de nulos y duplicados.
+### 2. Gestión de Datos (SQL)
 
-Normalización de formatos de fecha y categorías.
+Los datos procesados se cargaron en PostgreSQL para realizar consultas complejas y segmentaciones de alto rendimiento.
 
-**2. Gestión de Datos (SQL)**
-Los datos procesados se cargaron en una base de datos relacional para realizar consultas complejas y segmentaciones de alto rendimiento.
+- Creación del esquema y tabla `customer`.
+- Ejecución de consultas con **GROUP BY**, **subqueries**, **CTEs** y **Window Functions** (`ROW_NUMBER OVER PARTITION BY`) para preparar las vistas del reporte.
+- 10 consultas de negocio cubriendo ingresos, segmentación de clientes, análisis de descuentos y comportamiento de suscripción.
 
-Creación de esquemas y tablas.
+### 3. Visualización (Power BI)
 
-Ejecución de Joins y Common Table Expressions (CTEs) para preparar la vista final del reporte.
-
-**3. Visualización (Power BI)**
 Desarrollo de un tablero interactivo centrado en KPIs de negocio.
 
-Modelado de datos en estrella (Tablas de Hechos y Dimensiones).
+- Modelado directo sobre la tabla de hechos `customer`.
+- Creación de medidas DAX para KPIs (promedio de compra, promedio de review, conteo de clientes).
+- Configuración de tooltips personalizados (ej.: cantidad de ventas por grupo etario).
 
-Implementación de medidas avanzadas en DAX para análisis interanual (YoY).
+---
 
-**🖥️ Tablero (Dashboard)**
+## 🖥️ Tablero (Dashboard)
 
-El dashboard final permite filtrar por [Filtro 1], [Filtro 2] y [Filtro 3].
+El dashboard final permite filtrar por **Suscripción** (No / Sí), **Género** (Femenino / Masculino), **Categoría** (Abrigos, Accesorios, Calzado, Ropa) y **Medio de Compra** (Envío al Día Siguiente, Envío en 2 Días, Envío Gratis, Express, Retiro en Tienda, Standard).
 
-**Sección de Resumen:** Visualización de métricas principales.
+- **Sección de Resumen:** KPIs principales — Número de Clientes (3,9K), Promedio de Monto de Compra ($59,76), Promedio de Review (3,75).
+- **Proporción de Suscriptores:** Gráfico de dona — Sí 27% / No 73%.
+- **Ingresos y Ventas por Categoría:** Gráficos de barras verticales con valores absolutos.
+- **Ingresos y Ventas por Grupo Etario:** Barras horizontales con ingresos en el eje principal y cantidades de venta en tooltip.
+- **Lealtad por Cantidad de Compras:** Segmentación en Nuevos (0–5): 424, Regulares (6–20): 1.137, VIP (≥20): 2.339 clientes.
 
-**Análisis de Tendencias:** Gráficos de líneas y áreas para estacionalidad.
+---
 
-**Segmentación:** Análisis detallado por categoría y región.
+## 📈 Resultados
 
-**📈 Resultados**
+- **Hallazgo 1 — Dominio masculino en ingresos:** Los clientes masculinos generan más del doble de ingresos que los femeninos ($157.890 vs $75.191), lo que sugiere una oportunidad de crecimiento en el segmento femenino.
+- **Hallazgo 2 — Alta dependencia de descuentos:** Productos como Sombrero (50%), Zapatillas (49,66%) y Abrigo (49,07%) concentran la mayor proporción de compras con descuento, presionando los márgenes.
+- **Hallazgo 3 — Grupo etario Joven lidera ingresos:** Los Adultos Jóvenes contribuyeron $62.143 en ingresos totales, siendo el segmento de mayor valor.
+- **Hallazgo 4 — Base de clientes VIP dominante:** El 79,7% de los clientes tienen ≥20 compras previas (segmento VIP: 2.339), indicando una base fidelizada pero con bajo ingreso de clientes nuevos (424).
+- **Acción recomendada:** Diseñar campañas de adquisición orientadas al segmento femenino y joven, implementar un programa VIP para retener a los compradores frecuentes, y revisar la política de descuentos en los productos con mayor dependencia promocional.
 
-**Hallazgo 1:** Se detectó una caída del 15,2% en la eficiencia de [Variable] durante el último trimestre.
+---
 
-**Hallazgo 2:** La categoría [X] representa el 40% del margen de contribución.
+## ⚙️ Cómo ejecutarlo
 
-**Acción recomendada:** Optimizar la asignación de recursos en [Sector Y] basándose en la proyección de datos.
+- **Dataset:** Cargar el archivo `customer_shopping_behavior.csv` como fuente de datos.
+- **Python:** Abrir y ejecutar el notebook `Project.ipynb` (requiere `pandas`).
+- **SQL:** Importar el archivo `ProyectoFinal.sql` en PostgreSQL.
+- **Power BI:** Abrir el archivo `Proyecto GitHub.pbix` con Power BI Desktop.
+- **Reporte:** El documento Word detallado es `Analisis_Comportamiento_Compras.docx`.
 
-**⚙️ Cómo ejecutarlo**
+---
 
-**Python:** Clonar el repositorio y ejecutar pip install -r requirements.txt. Abrir EDA.ipynb.
+## 📬 Contacto
 
-**SQL:** Importar el archivo schema.sql y queries.sql en su gestor de base de datos.
-
-**Power BI:** Abrir el archivo .pbix localizado en la carpeta /dashboard.
-
-**Presentación:** El reporte detallado se encuentra en /docs/Reporte_Final.pdf.
-
-Contacto:
-**Agustin Martínez** - www.linkedin.com/in/amartinez-ingind
+**Agustín Martínez** — [linkedin.com/in/amartinez-ingind](https://www.linkedin.com/in/amartinez-ingind)
